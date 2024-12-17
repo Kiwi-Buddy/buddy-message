@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>I'm Your Buddy</title>
+    <title>I'm you're Buddy</title>
     <style>
         body {
             margin: 0;
@@ -25,18 +25,18 @@
         }
 
         .text {
-            font-size: 2rem;
+            font-size: 3rem;
             font-weight: bold;
             color: #333;
             position: absolute;
-            top: 30%;
+            top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
         }
 
         .next-button {
             position: absolute;
-            bottom: 80px;
+            bottom: 20px;
             right: 20px;
             padding: 10px 20px;
             background-color: #007bff;
@@ -54,39 +54,6 @@
         .hidden {
             display: none;
         }
-
-        .input-container {
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .input-container input {
-            padding: 10px;
-            font-size: 1rem;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            width: 300px;
-        }
-
-        .input-container button {
-            padding: 10px 20px;
-            background-color: #28a745;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1rem;
-        }
-
-        .input-container button:hover {
-            background-color: #218838;
-        }
     </style>
 </head>
 
@@ -94,61 +61,22 @@
     <div class="container">
         <div id="text" class="text">ยินดีต้อนรับ Buddy ของข้า</div>
         <button id="nextButton" class="next-button" onclick="showNextText()">ถัดไป</button>
-
-        <div id="inputContainer" class="input-container">
-            <div>เขียนความประสงค์ของเจ้ามา:</div>
-            <input type="text" id="userInput" placeholder="กรอกความประสงค์ที่นี่...">
-            <button onclick="submitToDiscord()">ส่งข้อความ</button>
-        </div>
     </div>
 
     <script>
-        const texts = ["ของขวัญเจ้าอยู่ในตู้เย็นนะ", "เขียนชื่อเจ้าไว้แล้วอยู่ช่องธรรมดา", "วันนี้ข้าใส่ของบำรุงไปด้วย เห็นเจ้าทำงานมาหนัก", "จงรับของรางวัลจากข้าไป"];
+        //const texts = ["นี่คือข้อความจากข้า เพื่อสื่อถึงความมีน้ำใจจากข้า", "ข้าจะคอยเอาขนมมาให้เจ้าวันละหน่อย", "ข้าวางของขวัญให้เจ้าไว้ในตู้เย็นช่อง Freeze แล้ว", "อยู่ตรงฝาประตูข้าจะติดป้ายชื่อของเจ้าไว้บนของขวัญ", "จงรับของรางวัลจากข้าไป"];
+        // const texts = ["วันนี้ข้ามีของให้อีกเช่นเคย", "ลองไปเปิดในตู้เย็นดู", "จะเจอถุงที่ข้าซ่อนไว้อยู่ซึ่งจะเขียนชื่อเจ้าไว้", "จงรับของรางวัลจากข้าไป"];
+        const texts = ["ข้าเอาของเจ้าใส่ไว้ในตู้เย็นแล้วอยู่ข้างฝาช่องธรรมดาใส่ถุงไว้เหมือนเดิม", "จนถึงตอนนี้เจ้าอาจจะรู้แล้วว่าข้าเป็นใคร", "จงรับของรางวัลจากข้าไป"];
         let currentIndex = 0;
 
         function showNextText() {
             if (currentIndex >= texts.length) {
                 document.getElementById('nextButton').classList.add('hidden');
-                document.getElementById('text').innerText = "คราวนี้เขียนความประสงค์ของเจ้ามาเลย";
-                document.getElementById('inputContainer').style.display = 'flex';
+                document.getElementById('text').innerText = ">_<";
             } else {
                 document.getElementById('text').innerText = texts[currentIndex];
             }
             currentIndex++;
-        }
-
-        function submitToDiscord() {
-            const webhookUrl = 'https://discord.com/api/webhooks/1318100871871074314/nND5vs5-C-n-ANw1WYvVnUqkd_mH0C7j9wc22hrJJ1YHrLYWJGNodt_GdyHSY9uw6gjx'; // Replace with your Discord webhook URL
-            const userInput = document.getElementById('userInput').value;
-
-            if (!userInput.trim()) {
-                alert('กรุณากรอกความประสงค์ก่อนส่ง');
-                return;
-            }
-
-            const payload = {
-                content: userInput
-            };
-
-            fetch(webhookUrl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(payload)
-            })
-                .then(response => {
-                    if (response.ok) {
-                        alert('ส่งความประสงค์สำเร็จ!');
-                        document.getElementById('userInput').value = '';
-                    } else {
-                        alert('เกิดข้อผิดพลาดในการส่งความประสงค์');
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('เกิดข้อผิดพลาดในการส่งความประสงค์');
-                });
         }
     </script>
 </body>
